@@ -1,16 +1,22 @@
-# tabbar_form_app
+# Bài tập Buổi 3 – Tương tác người dùng & Navigation
 
-A new Flutter project.
+Ứng dụng Flutter sử dụng BottomNavigationBar với 3 màn hình.
+Mỗi màn hình có một Form và xử lý sự kiện tương tác.
 
-## Getting Started
+## Chức năng chính
+- Điều hướng giữa các màn hình bằng BottomNavigationBar
+- Sử dụng StatefulWidget và setState
+- Xây dựng Form với TextFormField
+- Validation dữ liệu nhập
+- Xử lý sự kiện onPressed / onTap
 
-This project is a starting point for a Flutter application.
+## Công nghệ sử dụng
+- Flutter
+- Dart
 
-A few resources to get you started if this is your first Flutter project:
+## Hình thức nộp
+Link Repository GitHub
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Ghi chú
+Bài tập nhằm thực hành kết hợp Navigation và tương tác
+trong ứng dụng Flutter đa màn hình.
