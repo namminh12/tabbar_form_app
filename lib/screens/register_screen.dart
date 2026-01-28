@@ -1,42 +1,95 @@
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    final isValid = _formKey.currentState?.validate() ?? false;
+    final messenger = ScaffoldMessenger.of(context);
+    messenger.hideCurrentSnackBar();
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(isValid
+            ? 'Đăng ký thành công (dữ liệu đã gửi)'
+            : 'Dữ liệu không hợp lệ — đã nhận (giả)'),
+        backgroundColor: isValid ? Colors.green : Colors.orange,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Họ tên',
-                border: OutlineInputBorder(),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Họ tên',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Vui lòng nhập họ tên';
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Vui lòng nhập email';
+                  if (!value.contains('@')) return 'Email không hợp lệ';
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Mật khẩu',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Mật khẩu',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Vui lòng nhập mật khẩu';
+                  if (value.length < 6) return 'Mật khẩu phải có ít nhất 6 ký tự';
+                  return null;
+                },
               ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Đăng ký'),
-            ),
-          ],
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _submit,
+                child: const Text('Đăng ký'),
+              ),
+            ],
+          ),
         ),
       ),
     );

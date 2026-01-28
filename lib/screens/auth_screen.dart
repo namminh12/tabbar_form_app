@@ -18,7 +18,7 @@ class AuthScreen extends StatelessWidget {
             tabs: [
               Tab(text: 'Đăng nhập'),
               Tab(text: 'Đăng ký'),
-              Tab(text: 'Quên MK'),
+              Tab(text: 'Quên mật khẩu'),
             ],
           ),
         ),
